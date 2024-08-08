@@ -117,7 +117,7 @@ function Signup() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <form onSubmit={handleSignup} className="bg-bgLightBlue p-6  shadow-md w-auto max-w-sm  rounded-xl ">
+        <form onSubmit={handleSignup} className="bg-bgLightBlue p-8  shadow-md w-auto max-w-sm  rounded-xl ">
           <h2 className="text-xl font-semibold text-start text-blue-950">Signup</h2>
           <div className='space-y-2 mt-4'>
             <div>
@@ -193,7 +193,7 @@ function Signup() {
             </button>
           </div>
 
-          <p className='text-blue-500 text-center text-sm '>Have an account?<Link to="/login" className='text-blue-900'>sign in</Link></p>
+          <p className='text-blue-500 text-center text-sm '>Have an account?<Link to="/login" className='text-blue-900'> sign in</Link></p>
         </form>
       )}
     </div>
