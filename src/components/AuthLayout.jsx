@@ -8,7 +8,7 @@ const AuthLayout = () => {
   return (
     <section className="w-full h-full px-14 bg-bgDarkBlue">
       <Header />
-      <div className='space-x-16 pt-10 lg:flex '>
+      <div className='space-x-16 pt-6 lg:flex '>
         <div className='w-full lg:w-[35%]'>
           <Outlet />
         </div>
