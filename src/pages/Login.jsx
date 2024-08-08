@@ -55,7 +55,7 @@ function Login() {
 
   }
   return (
-    <div className="min-h-screen w-full   flex items-center justify-center">
+    <div className=" w-full   flex items-center justify-center">
       {loading ? (
         <p>Loading...</p>
       ) : (

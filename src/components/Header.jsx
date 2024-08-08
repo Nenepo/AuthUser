@@ -9,8 +9,8 @@ function Header() {
   };
 
   return (
-    <div className="flex items-center justify-between p-4">
-      <img src="/assets/logo.png" alt="logo" className="w-[150px]" />
+    <div className="flex items-center justify-between pt-4 h-10">
+      <img src="../src/assets/logo.png" alt="logo" className="w-[120px]" />
 
       {/* Mobile Menu Icon */}
       <div className='space-y-1 cursor-pointer z-50 md:hidden' onClick={toggleMenu}>
