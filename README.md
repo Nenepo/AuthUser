@@ -58,6 +58,23 @@ AuthUser is a web application that integrates Firebase for authentication and re
     ```
 
 ## Build
-To create a production build, use:
-```bash
-npm run build
+- To create a production build, use:
+- npm run build
+
+## Deployment
+Without a vercel.json file, Vercel might not correctly handle client-side routing for Single Page Applications (SPAs) like React apps. By default, Vercel serves static files but needs a configuration to handle client-side routing properly.
+
+### Create the vercel.json File:
+In the root of your project, create a file named vercel.json. You can do this manually or by using your command line:
+
+- touch vercel.json
+
+Add Routing Configuration:
+- In vercel.json, add the following configuration to ensure all routes are redirected to index.html:
+
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+This configuration ensures that all incoming requests are directed to index.html, where React Router can handle the routing client-side.
