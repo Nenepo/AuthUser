@@ -77,7 +77,7 @@ function Login() {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="abcd@email.com"
-                className="w-full p-2 border  placeholder:text-sm"
+                className="w-full p-2 border rounded text-sm outline-none  placeholder:text-sm"
                 required
               />
             </div>
@@ -85,12 +85,12 @@ function Login() {
               <label htmlFor="password" className="text-sm text-start text-blue-950">Password</label>
 
               <input
-                type="password"
+               type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Password"
-                className="w-full p-2 border rounded placeholder:text-sm"
+                className="w-full p-2 border rounded text-sm outline-none  placeholder:text-sm"
                 required
               />
                <button type="button" onClick={togglePassword} className="absolute top-6 inset-y-0 right-0 flex items-center px-2">
@@ -106,18 +106,18 @@ function Login() {
           <button type="submit" className="w-full bg-orange-600 text-white p-2 rounded font-semibold mt-4">Login</button>
           <p className='text-blue-500 mt-4'>or continue with</p>
           <div className='flex justify-between mt-6 mb-6'>
-            <button type="button" onClick={handleGoogleLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
+            <button type="button" onClick={handleGoogleLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full transition-colors duration-500 hover:bg-slate-300">
               <img src="/assets/flat-color-icons_google.png" alt="google" className='w-3 h-3' />
             </button>
-            <button type="button" onClick={handleGithubLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
+            <button type="button" onClick={handleGithubLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full transition-colors duration-500 hover:bg-slate-300">
               <img src="/assets/akar-icons_github-fill.png" alt="google" className='w-3 h-3' />
             </button>
-            <button type="button" onClick={handleFacebookLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
+            <button type="button" onClick={handleFacebookLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full transition-colors duration-500 hover:bg-slate-300">
               <img src="/assets/bi_facebook.png" alt="google" className='w-3 h-3' />
             </button>
           </div>
 
-          <p className='text-blue-500 text-center text-sm '>Don't have an account? <Link to="/signup" className='text-blue-900'>Register for free</Link></p>
+          <p className='text-blue-500 text-center text-sm '>Don't have an account? <Link to="/signup" className='text-blue-900 transition-colors duration-500 hover:bg-slate-800'>Register for free</Link></p>
         </form>
       )}
     </div>
