@@ -60,7 +60,7 @@ function Login() {
     setShowPassword((prev) => !prev);
   };
   return (
-    <div className=" w-full   flex items-center justify-center pb-10">
+    <div className=" w-full   flex items-center justify-center pb-30">
       {loading ? (
         <p>Loading...</p>
       ) : (
