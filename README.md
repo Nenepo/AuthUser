@@ -70,3 +70,5 @@ These best practices will help you create a robust, secure, and well-documented 
 
 
 
+- "node": true
+-- this just helped my process.env work 
