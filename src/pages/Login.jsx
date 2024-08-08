@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -54,8 +55,12 @@ function Login() {
   const handleFacebookLogin = () => {
 
   }
+  
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
-    <div className=" w-full   flex items-center justify-center">
+    <div className=" w-full   flex items-center justify-center pb-10">
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -72,11 +77,11 @@ function Login() {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="abcd@email.com"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border  placeholder:text-sm"
                 required
               />
             </div>
-            <div>
+            <div className='relative'>
               <label htmlFor="password" className="text-sm text-start text-blue-950">Password</label>
 
               <input
@@ -85,9 +90,12 @@ function Login() {
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Password"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded placeholder:text-sm"
                 required
               />
+               <button type="button" onClick={togglePassword} className="absolute top-6 inset-y-0 right-0 flex items-center px-2">
+                {showPassword ? <img className="h-3 w-3" src="/assets/eye-icon-open.png" alt="show-password" /> : <img className="h-3 w-3" src="/assets/eye-icon-closed.png" alt="close-password" />}
+              </button>
             </div>
 
           </div>
@@ -99,13 +107,13 @@ function Login() {
           <p className='text-blue-500 mt-4'>or continue with</p>
           <div className='flex justify-between mt-6 mb-6'>
             <button type="button" onClick={handleGoogleLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
-              <img src="../src/assets/flat-color-icons_google.png" alt="google" className='w-3 h-3' />
+              <img src="/assets/flat-color-icons_google.png" alt="google" className='w-3 h-3' />
             </button>
             <button type="button" onClick={handleGithubLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
-              <img src="../src/assets/akar-icons_github-fill.png" alt="google" className='w-3 h-3' />
+              <img src="/assets/akar-icons_github-fill.png" alt="google" className='w-3 h-3' />
             </button>
             <button type="button" onClick={handleFacebookLogin} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
-              <img src="../src/assets/bi_facebook.png" alt="google" className='w-3 h-3' />
+              <img src="/assets/bi_facebook.png" alt="google" className='w-3 h-3' />
             </button>
           </div>
 

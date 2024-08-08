@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     username: '',
     confirmPassword: '',
@@ -32,6 +34,9 @@ function Signup() {
     }
   };
 
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -101,14 +106,14 @@ function Signup() {
     }
   };
 
-const handleGithubSignup = () => {
+  const handleGithubSignup = () => {
 
-}
-const handleFacebookSignup = () => {
-  
-}
+  }
+  const handleFacebookSignup = () => {
+
+  }
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className=" flex items-center justify-center pb-20">
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -140,7 +145,7 @@ const handleFacebookSignup = () => {
                 required
               />
             </div>
-            <div>
+            <div className='relative'>
               <label htmlFor="password" className="text-sm text-start text-blue-950">Password</label>
 
               <input
@@ -152,9 +157,12 @@ const handleFacebookSignup = () => {
                 className="w-full p-2 border rounded"
                 required
               />
+              <button type="button" onClick={togglePassword} className="absolute top-6 inset-y-0 right-0 flex items-center px-2">
+                {showPassword ? <img className="h-3 w-3" src="/assets/eye-icon-open.png" alt="show-password" /> : <img className="h-3 w-3" src="/assets/eye-icon-closed.png" alt="close-password" />}
+              </button>
             </div>
 
-            <div>
+            <div className='relative'>
               <label htmlFor="confirmPassword" className="text-sm text-start text-blue-950">Confirm Password</label>
 
               <input
@@ -166,19 +174,22 @@ const handleFacebookSignup = () => {
                 className="w-full p-2 border rounded placeholder:text-sm "
                 required
               />
+              <button type="button" onClick={togglePassword} className="absolute inset-y-0 top-6 right-0 flex items-center px-2">
+                {showPassword ? <img className="h-3 w-3" src="/assets/eye-icon-open.png" alt="show-password" /> : <img className="h-3 w-3" src="/assets/eye-icon-closed.png" alt="close-password" />}
+              </button>
             </div>
 
           </div>
           <button type="submit" className="w-full bg-orange-600 text-white p-2 rounded font-semibold mt-8">Sign up</button>
           <div className='flex justify-between mt-6 mb-6'>
             <button type="button" onClick={handleGoogleSignup} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
-              <img src="../src/assets/flat-color-icons_google.png" alt="google" className='w-3 h-3' />
+              <img src="/assets/flat-color-icons_google.png" alt="google" className='w-3 h-3' />
             </button>
             <button type="button" onClick={handleGithubSignup} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
-              <img src="../src/assets/akar-icons_github-fill.png" alt="google" className='w-3 h-3' />
+              <img src="/assets/akar-icons_github-fill.png" alt="google" className='w-3 h-3' />
             </button>
             <button type="button" onClick={handleFacebookSignup} className=" bg-slate-200 text-white py-2 px-6 rounded-full ">
-              <img src="../src/assets/bi_facebook.png" alt="google" className='w-3 h-3' />
+              <img src="/assets/bi_facebook.png" alt="google" className='w-3 h-3' />
             </button>
           </div>
 
