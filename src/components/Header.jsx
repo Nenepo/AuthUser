@@ -13,7 +13,7 @@ function Header() {
       <img src="/assets/logo.png" alt="logo" className="w-[120px]"/>
 
       {/* Mobile Menu Icon */}
-      <div className='space-y-1 cursor-pointer z-50  md:hidden' onClick={toggleMenu}>
+      <div className='space-y-1 cursor-pointer z-50 h-auto  md:hidden' onClick={toggleMenu}>
         <div className={`w-5 h-[0.1rem] bg-btnDark transition-all duration-300 ${openMenu ? 'transform rotate-45 translate-y-[0.4rem]' : ''}`}></div>
         <div className={`w-5 h-[0.1rem] bg-btnDark transition-all duration-300 ${openMenu ? 'opacity-0' : ''}`}></div>
         <div className={`w-5 h-[0.1rem] bg-btnDark transition-all duration-300 ${openMenu ? 'transform -rotate-45 -translate-y-[0.3rem]' : ''}`}></div>
