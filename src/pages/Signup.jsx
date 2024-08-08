@@ -193,7 +193,7 @@ function Signup() {
             </button>
           </div>
 
-          <p className='text-blue-500 text-center text-sm '>Have an account?<Link to="/login" className='text-blue-900'> sign in</Link></p>
+          <p className='text-blue-500 text-center text-sm '>Have an account?<Link to="/login" className='text-blue-900 transition-colors duration-500 hover:text-slate-800'> sign in</Link></p>
         </form>
       )}
     </div>

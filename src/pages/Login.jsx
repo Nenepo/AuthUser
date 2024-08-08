@@ -117,7 +117,7 @@ function Login() {
             </button>
           </div>
 
-          <p className='text-blue-500 text-center text-sm '>Don't have an account? <Link to="/signup" className='text-blue-900 transition-colors duration-500 hover:bg-slate-800'>Register for free</Link></p>
+          <p className='text-blue-500 text-center text-sm '>Don't have an account? <Link to="/signup" className='text-blue-900 transition-colors duration-500 hover:text-slate-800'>Register for free</Link></p>
         </form>
       )}
     </div>
