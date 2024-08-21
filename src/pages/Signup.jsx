@@ -4,10 +4,12 @@ import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
 import User from '../models/User';
 import { handleFirebaseError } from '../utils/errorHandler';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function Signup() {
+ const navigate = useNavigate()
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,29 +20,38 @@ function Signup() {
     password: '',
     email: ''
   });
-  console.log(formData)
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const validateData = (name, value) => {
-    if (name === "email" && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+  const validateData = () => {
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
       setError("Invalid email address");
-    } else if (name === "password" && value.length < 6) {
-      setError("Password must be at least 6 characters long");
-    } else if (name === "confirmPassword" && value !== formInput.password) {
-      setError("Passwords do not match");
+      return false;
     }
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return false;
+    }
+    if (formData.confirmPassword !== formData.password) {
+      setError("Passwords do not match");
+      return false;
+    }
+    return true;
   };
+
 
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+   validateData()
 
     if (!validateData()) {
       setLoading(false);
@@ -55,13 +66,6 @@ function Signup() {
       const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
       const user = new User(userCredential.user.uid, formData.email, formData.username);
 
-      // Validate the username
-      if (!user.username) {
-        setError('Username cannot be empty');
-        setLoading(false);
-        return;
-      }
-
       // Log user object before writing to Firebase
       console.log('User:', user);
 
@@ -71,7 +75,7 @@ function Signup() {
         email: user.email,
         username: user.username, // Ensure correct field here
       });
-
+      navigate("/login")
       console.log('User created:', user);
     } catch (error) {
       handleFirebaseError(error);
@@ -114,16 +118,16 @@ function Signup() {
   }
   return (
     <div className=" flex items-center justify-center pb-20">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+     
         <form onSubmit={handleSignup} className="bg-bgLightBlue p-8  shadow-md w-auto max-w-sm  rounded-xl ">
           <h2 className="text-xl font-semibold text-start text-blue-950">Signup</h2>
+          <p className='text-red-500'>{error}</p>
           <div className='space-y-2 mt-4'>
             <div>
               <label htmlFor="username" className="text-sm text-start text-blue-950">Username</label>
               <input
                 type="text"
+                id='username'
                 name="username"
                 value={formData.username}
                 onChange={handleInputChange}
@@ -137,6 +141,8 @@ function Signup() {
 
               <input
                 type="email"
+                id='email'
+
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
@@ -151,6 +157,8 @@ function Signup() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
+                id='password'
+
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Password"
@@ -167,6 +175,8 @@ function Signup() {
 
               <input
                 type={showPassword ? 'text' : 'password'}
+                id='confirmPassword'
+
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
@@ -195,7 +205,7 @@ function Signup() {
 
           <p className='text-blue-500 text-center text-sm '>Have an account?<Link to="/login" className='text-blue-900 transition-colors duration-500 hover:text-slate-800'> sign in</Link></p>
         </form>
-      )}
+     
     </div>
   );
 }

@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { auth, provider } from '../services/config';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { handleFirebaseError } from '../utils/errorHandler';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [loading, setLoading] = useState(false);
+ const navigate = useNavigate();
+
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,6 +26,9 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       console.log('User logged in successfully');
+      navigate("/welcome")
+
+
       // Redirect or handle post-login logic here
     } catch (error) {
       handleFirebaseError(error);
@@ -41,6 +45,8 @@ function Login() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log('User logged in with Google:', user);
+
+      navigate("/welcome")
       // Redirect or handle post-login logic here
     } catch (error) {
       handleFirebaseError(error);
@@ -60,10 +66,8 @@ function Login() {
     setShowPassword((prev) => !prev);
   };
   return (
-    <div className=" w-full   flex items-center justify-center pb-40">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+    <div className=" w-full  h-full  flex items-center justify-center pb-40 mt-24">
+  
         <form onSubmit={handleLogin} className="rounded-[40px] p-6 bg-bgLightBlue shadow-xl w-full max-w-sm ">
           <h2 className="text-xl font-semibold text-start text-blue-950">Login</h2>
           {error && <p className="text-red-500">{error}</p>}
@@ -119,7 +123,7 @@ function Login() {
 
           <p className='text-blue-500 text-center text-sm '>Don't have an account? <Link to="/signup" className='text-blue-900 transition-colors duration-500 hover:text-slate-800'>Register for free</Link></p>
         </form>
-      )}
+   
     </div>
   );
 }
