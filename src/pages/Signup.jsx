@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { auth, provider, db } from '../services/config';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
@@ -21,10 +21,10 @@ function Signup() {
     email: ''
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
+  });
 
   const validateData = () => {
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { auth, provider } from '../services/config';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { handleFirebaseError } from '../utils/errorHandler';
@@ -14,14 +14,14 @@ function Login() {
     password: ''
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
+  });
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     setError('');
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
@@ -31,10 +31,10 @@ function Login() {
 
       // Redirect or handle post-login logic here
     } catch (error) {
-      handleFirebaseError(error);
-      setError(error.message);
+    const customErrorMessage =  handleFirebaseError(error);
+      setError(customErrorMessage);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -52,7 +52,7 @@ function Login() {
       handleFirebaseError(error);
       setError(error.message);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
   const handleGithubLogin = () => {
@@ -66,11 +66,11 @@ function Login() {
     setShowPassword((prev) => !prev);
   };
   return (
-    <div className=" w-full  h-full  flex items-center justify-center pb-40 mt-24">
+    <div className=" w-full    flex items-center justify-center pb-40 mt-24">
   
         <form onSubmit={handleLogin} className="rounded-[40px] p-6 bg-bgLightBlue shadow-xl w-full max-w-sm ">
           <h2 className="text-xl font-semibold text-start text-blue-950">Login</h2>
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <div className='space-y-2 mt-4'>
             <div >
               <label htmlFor="email" className="text-sm text-start text-blue-950">Email</label>

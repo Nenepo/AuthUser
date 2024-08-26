@@ -9,7 +9,7 @@ function Header() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full flex items-center justify-between h-24 bg-white shadow-md z-50">
+    <div className="fixed top-0 left-0 w-full flex items-center justify-between h-24 bg-white shadow-md z-50 px-10">
       <img src="/assets/logo.png" alt="logo" className="w-[120px]"/>
 
       {/* Mobile Menu Icon */}
